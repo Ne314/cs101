@@ -1,4 +1,4 @@
 # cs101
 
 > Something 
-! [Description] (photos/img.PNG)
+![Description](photos/img.PNG)
