@@ -1,4 +1,4 @@
 # cs101
 
-![Description](photos/abstract.PNG)
-![Description](photos/pattern.PNG)
+![A](photos/abstract.PNG)
+![P](photos/pattern.PNG)
