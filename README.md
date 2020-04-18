@@ -7,6 +7,6 @@ Abstract
 ![A](photos/abstract.PNG)
 
 
-Patten
+Pattern
 
 ![P](photos/pattern.PNG)
