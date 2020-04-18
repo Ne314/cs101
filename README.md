@@ -1,4 +1,4 @@
 # cs101
 
-> Something 
-![Description](photos/img.PNG)
+![A](photos/abstract.PNG)
+![P](photos/pattern.PNG)
