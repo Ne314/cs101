@@ -1,4 +1,5 @@
 # cs101
 
-> Something 
-![Description](photos/img.PNG)
+> Вся домашняя работа лежит в папке HomeWork
+![Description](photos/abstract.PNG)
+![Description](photos/pattern.PNG)
