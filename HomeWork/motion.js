@@ -1,3 +1,4 @@
+// Кривая погони + музыка из "Shin Megami Tensei: Nocturne" (фоновая музыка не оттуда) 
 function setup() {
   createCanvas(500, 500);
 }
@@ -39,4 +40,4 @@ function spiral(q, e, n, m){
 function preload() {
   soundFormats('mp3', 'ogg');
   ost = loadSound('TheDayOfNight.mp3');
-}
+}}
