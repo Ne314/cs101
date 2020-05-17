@@ -38,8 +38,54 @@ drawSprites();
     textFont(ScoreEnemy, 25);
     fill(0, 0, 0);
     text('Score:  ' + Kill, 600, 25);
-    GGWalking();
-  } 
+         MoreMagic.overlap(Enemys, iveBeenWatingForThis);
+      Enemys.overlap(GG, Hit);
+      MoreBottles.overlap(GG, MagicPotion);
+    
+  
+        if (keyDown('S')) {
+          GG.changeAnimation('Up');
+          Motion.add(0, 1.2)
+        }   
+        else if (keyWentUp('S')) {
+          GG.changeAnimation('UpSt');
+          Motion.add(0, 0);
+        }
+    
+        if (keyDown('D')) {
+          GG.changeAnimation('Rt');
+          Motion.add(1.2, 0);
+        } 
+        else if (keyWentUp('D')) {
+          GG.changeAnimation('RtSt');
+          Motion.add(0, 0)
+        }
+
+        if (keyDown('A')) {
+          GG.changeAnimation('Lt');
+          Motion.add(-1.2, 0)
+          } 
+        else if (keyWentUp('A')) {
+          GG.changeAnimation('LtSt');
+          Motion.add(0, 0)
+          }
+  
+        if (keyDown('W')) {
+          GG.changeAnimation('Dn');
+          Motion.add(0, -1.2)
+        } 
+        else if (keyWentUp('W')) {
+          GG.changeAnimation('DnSt');
+          Motion.add(0, 0)
+        }
+    
+    GG.position = Motion;
+    
+    if (mouseWentDown(LEFT) && SP > 0) {
+      Abracadabra();
+      PSYPower();
+    }
+  }  
   
   if (GameState == 'Load') {
     image(FirstScreenImg, 200, 175);
