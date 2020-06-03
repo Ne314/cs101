@@ -19,7 +19,7 @@ function preload() {
   MagicImg = loadImage('Sprites/bullet1.png');
   ManaImg = loadImage('Sprites/Mana.png');
   HeartImg = loadImage('Sprites/Heart_0001.png');
-  GameOverImg = loadImage('Sprites/GameOver.png');
+  GameOverImg = loadImage('Sprites/GameOver.gif');
   FirstScreenImg = loadImage('Sprites/FirstScreen.gif');
   BottleImg = loadImage('Sprites/Bottle.gif');
   ScoreEnemy = loadFont('Sprites/Score.ttf');
@@ -97,6 +97,10 @@ drawSprites();
   if (GameState == 'Over') {
     background(0, 0, 0);
     image(GameOverImg, 287.5, 237.5);
+  }
+  
+  if (GameState == 'Over' && keyIsPressed && key === 'r'){
+     document.location.reload(true);
   }
 }
 
