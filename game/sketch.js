@@ -12,6 +12,7 @@ let MoreBottles;
 let ScoreEnemy;
 let Kill = 0;
 let Motion; 
+let StateChanged = false;
 
 
 function preload() {
@@ -19,11 +20,11 @@ function preload() {
   MagicImg = loadImage('Sprites/bullet1.png');
   ManaImg = loadImage('Sprites/Mana.png');
   HeartImg = loadImage('Sprites/Heart_0001.png');
-  GameOverImg = loadImage('Sprites/GameOver.png');
+  GameOverImg = loadImage('Sprites/GameOver.gif');
   FirstScreenImg = loadImage('Sprites/FirstScreen.gif');
   BottleImg = loadImage('Sprites/Bottle.gif');
   ScoreEnemy = loadFont('Sprites/Score.ttf');
-  EnemyImg = loadImage('Sprites/enemy.gif');
+  EnemyImg = loadImage('Sprites/E_0001.gif');
 }
 
 function setup() {
@@ -32,65 +33,53 @@ function setup() {
 }
 
 function draw() {
-background(227, 230, 255);
-drawSprites();
-  if (GameState == 'Start' && LifeBar > 0) { 
-    textFont(ScoreEnemy, 25);
-    fill(0, 0, 0);
-    text('Score:  ' + Kill, 600, 25);
-    GGWalking();
-  } 
-  
-  if (GameState == 'Load') {
-    image(FirstScreenImg, 200, 175);
-    if (keyDown ('N')){
-    GameStart();
-    }
-  } 
-  
-  if (GameState == 'Over') {
-    background(0, 0, 0);
-    image(GameOverImg, 287.5, 237.5);
-  }
-}
-
-function GGWalking() {
-  
-    MoreMagic.overlap(Enemys, iveBeenWatingForThis);
-    Enemys.overlap(GG, Hit);
-    MoreBottles.overlap(GG, MagicPotion);
+  background(227, 230, 255);
+  drawSprites();
+    if (GameState == 'Start' && LifeBar > 0) { 
+      textFont(ScoreEnemy, 25);
+      fill(0, 0, 0);
+      text('Score:  ' + Kill, 600, 25);
+        
+      MoreMagic.overlap(Enemys, iveBeenWatingForThis);
+      Enemys.overlap(GG, Hit);
+      MoreBottles.overlap(GG, MagicPotion);
     
   
-      if (keyDown('S')) {
-      GG.changeAnimation('Up');
-      Motion.add(0, 1.2)
-    } else if (keyWentUp('S')) {
-      GG.changeAnimation('UpSt');
-      Motion.add(0, 0);
-    }
+        if (keyDown('S')) {
+          GG.changeAnimation('Up');
+          Motion.add(0, 1.2)
+        }   
+        else if (keyWentUp('S')) {
+          GG.changeAnimation('UpSt');
+          Motion.add(0, 0);
+        }
     
-    if (keyDown('D')) {
-      GG.changeAnimation('Rt');
-      Motion.add(1.2, 0);
-    } else if (keyWentUp('D')) {
-      GG.changeAnimation('RtSt');
-      Motion.add(0, 0)
-    }
+        if (keyDown('D')) {
+          GG.changeAnimation('Rt');
+          Motion.add(1.2, 0);
+        } 
+        else if (keyWentUp('D')) {
+          GG.changeAnimation('RtSt');
+          Motion.add(0, 0)
+        }
 
-    if (keyDown('A')) {
-      GG.changeAnimation('Lt');
-      Motion.add(-1.2, 0)
-    } else if (keyWentUp('A')) {
-      GG.changeAnimation('LtSt');
-      Motion.add(0, 0)
-    }
-    if (keyDown('W')) {
-      GG.changeAnimation('Dn');
-      Motion.add(0, -1.2)
-    } else if (keyWentUp('W')) {
-      GG.changeAnimation('DnSt');
-      Motion.add(0, 0)
-    }
+        if (keyDown('A')) {
+          GG.changeAnimation('Lt');
+          Motion.add(-1.2, 0)
+          } 
+        else if (keyWentUp('A')) {
+          GG.changeAnimation('LtSt');
+          Motion.add(0, 0)
+          }
+  
+        if (keyDown('W')) {
+          GG.changeAnimation('Dn');
+          Motion.add(0, -1.2)
+        } 
+        else if (keyWentUp('W')) {
+          GG.changeAnimation('DnSt');
+          Motion.add(0, 0)
+        }
     
     GG.position = Motion;
     
@@ -98,7 +87,26 @@ function GGWalking() {
       Abracadabra();
       PSYPower();
     }
+  } 
+  
+  if (GameState == 'Load') {
+    image(FirstScreenImg, 200, 175);
+    if (keyDown ('N')){
+      GameStart();
+    }
+  } 
+  
+  if (GameState == 'Over') {
+    background(0, 0, 0);
+    image(GameOverImg, 287.5, 237.5);
+  }
+  
+  if (GameState == 'Over' && keyIsPressed && key === 'r'){
+      document.location.reload(true);
+      }
 }
+
+
 
 function PSYPower() {
   Magic = createSprite(GG.position.x, GG.position.y);
@@ -140,14 +148,17 @@ function Hit(Enemy) {
     Heart.changeAnimation('3HP');
     Enemy.remove();
   }
+  
   if (LifeBar == 2) {
     Heart.changeAnimation('2HP');
     Enemy.remove();
   }
+  
   if (LifeBar == 1) {
     Heart.changeAnimation('1HP');
     Enemy.remove();
   }
+  
   if (LifeBar == 0) {
     GG.changeAnimation('Dead');
     Heart.changeAnimation('0HP');
@@ -155,12 +166,15 @@ function Hit(Enemy) {
     setTimeout(GameOver, 2500);
     MoreMagic.removeSprites();
     Enemys.removeSprites();
+    StateChanged = true; 
 
   }
 }
 
 function Abracadabra() {
+  
   SP = SP - 1;
+  
   if (SP == 3) {
     Mana.changeAnimation('-1SP');
   }
@@ -199,7 +213,7 @@ function GameStart() {
 
     GG = createSprite(width / 2, height / 2);
     GG.addImage('normal', GGImg);
-    GG.scale = 1.5;
+    GG.scale = 1;
     GG.addAnimation('Up', 'Sprites/GG_0001.gif');
     GG.addAnimation('UpSt', 'Sprites/Front.png');
     GG.addAnimation('Rt', 'Sprites/GG_0002.gif');
@@ -230,4 +244,29 @@ function GameOver() {
     GG.remove();
     Mana.remove();
 
+    if (StateChanged){
+      StateChanged = false; 
+      let body = document.querySelector('body');
+      
+      let form = document.createElement('form');
+      form.style.position = "absolute";
+      form.style.top = "75%";
+      form.style.left = "50%";
+      form.style.transform = "translateX(-50%)";
+      
+      let  newBtn = document. createElement('button');
+      newBtn.textContent = "Save";
+      
+      let newInput = document.createElement('input');
+      newInput.setAttribute('type','text');
+      newInput.setAttribute('placeholder', 'Enter your name');
+      newInput.setAttribute('maxlength', 20);
+      newInput.required = true;
+      
+      body.appendChild(form);
+      body.appendChild(newBtn);
+      body.appendChild(newInput);
+      
+      //form.addEventListener()
+        }
 }
