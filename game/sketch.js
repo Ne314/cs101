@@ -267,6 +267,5 @@ function GameOver() {
       body.appendChild(newBtn);
       body.appendChild(newInput);
       
-      //form.addEventListener()
         }
 }
